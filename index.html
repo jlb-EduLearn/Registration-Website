@@ -118,11 +118,16 @@
                     <div class="qr-container">
                         <img src="qrcode.png" alt="GCash QR">
                         <p>GCash: 0912 345 6789 (ITECHLAB)</p>
+                        
+                        <a href="https://m.gcash.com/applink/pay-qr" class="gcash-app-btn">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/GCash_logo.svg/1200px-GCash_logo.svg.png" alt="GCash Logo">
+                            Open GCash App
+                        </a>
                     </div>
                     
                     <div class="input-group">
                         <label>GCash Reference Number</label>
-                        <input type="text" name="gcash_ref" placeholder="13-digit number" required pattern="\d{13}">
+                        <input type="text" name="gcash_ref" placeholder="13-digit number" required pattern="\d{13}" title="Please enter exactly 13 digits">
                     </div>
 
                     <p class="section-note" style="margin-top:15px">For Official Receipt (Optional):</p>
@@ -168,5 +173,3 @@
     </script>
 </body>
 </html>
-
-
