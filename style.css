@@ -67,7 +67,7 @@ body {
     line-height: 1.4;
 }
 
-/* INPUTS */
+/* INPUTS & MOBILE SELECT */
 .input-group { margin-bottom: 18px; }
 .input-group label { 
     display: block; 
@@ -85,9 +85,18 @@ select {
     padding: 14px;
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    font-size: 0.95rem;
+    font-size: 16px; 
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #fff;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
 }
 
 input:focus, select:focus {
@@ -101,12 +110,20 @@ input:focus, select:focus {
     background: #f8fafc; 
 }
 
-/* DROPDOWN OPTGROUP */
+/* DROPDOWN OPTGROUP & BORDERS */
 select optgroup {
     font-size: 0.8rem;
     color: var(--primary);
-    background: #fff;
-    font-weight: bold;
+    background: #f1f5f9;
+    font-weight: 800;
+    padding: 10px;
+    border-top: 2px solid var(--primary); /* ADDED: Border for every date */
+}
+
+select option {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0; /* ADDED: Line between workshops */
+    background-color: #fff;
 }
 
 /* CUSTOM CHECKBOX */
@@ -154,7 +171,7 @@ select optgroup {
 }
 .check-container input:checked ~ .checkmark:after { display: block; }
 
-/* PAYMENT BOX & GCASH BUTTON */
+/* PAYMENT SECTION */
 .payment-box { 
     background: #f8fafc; 
     padding: 24px; 
@@ -162,53 +179,26 @@ select optgroup {
     border: 1px solid #e2e8f0;
 }
 
-.qr-container { 
-    text-align: center; 
-    margin-bottom: 20px; 
-    background: white; 
-    padding: 15px; 
-    border-radius: 12px; 
-    border: 1px solid #eee;
+.payment-info-text {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid var(--primary);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-.qr-container img { 
-    width: 180px; 
-    height: auto; 
-    margin-bottom: 10px;
-}
-.qr-container p {
-    font-size: 0.85rem;
-    font-weight: 700;
+
+.payment-info-text p {
+    font-size: 0.95rem;
     color: #1e293b;
+    margin-bottom: 5px;
+    line-height: 1.5;
 }
 
-.gcash-app-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--gcash-blue);
-    color: white;
-    text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    margin-top: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 86, 224, 0.2);
+.payment-info-text strong {
+    color: var(--primary);
 }
 
-.gcash-app-btn:hover {
-    background-color: #0046b8;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 86, 224, 0.3);
-}
-
-.gcash-app-btn img {
-    width: 18px !important;
-    height: auto;
-    margin-right: 8px;
-    filter: brightness(0) invert(1);
-}
 /* File Upload Styling */
 .file-upload-wrapper {
     position: relative;
@@ -259,10 +249,9 @@ select optgroup {
     box-shadow: 0 15px 25px rgba(99, 102, 241, 0.3);
 }
 
-.btn:active { transform: translateY(0); }
-
 /* MOBILE ADJUSTMENTS */
 @media (max-width: 480px) {
-    .glass-card { padding: 30px 20px; }
+    .glass-card { padding: 30px 15px; }
     .header h2 { font-size: 1.1rem; }
+    .payment-info-text p { font-size: 0.85rem; }
 }
