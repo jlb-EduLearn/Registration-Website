@@ -18,7 +18,7 @@
             <p>Arduino Day Philippines 2026 | iTECHLAB</p>
         </div>
 
-        <form action="https://formspree.io/f/mlgwaobg" method="POST" id="regForm">
+        <form action="https://formspree.io/f/mlgwaobg" method="POST" id="regForm" enctype="multipart/form-data">
             
             <div class="form-section">
                 <div class="section-title">SECTION 1: PERSONAL INFORMATION</div>
@@ -116,15 +116,21 @@
                 <div class="section-title">SECTION 4: PAYMENT DETAILS</div>
                 <div class="payment-box">
                     <div class="qr-container">
-                        <img src="qrcode.jpg" alt="GCash QR">
+                        <img src="qrcode.jpg" alt="Bank QR">
                         <p>Account Number: 3 5133 5156 0470</p>
-                        </a>
                     </div>
                 
-                    
                     <div class="input-group">
-                        <label>Bank</label>
-                        <input type="text" name="gcash_ref" placeholder="13-digit number" required pattern="\d{13}" title="Please enter exactly 13 digits">
+                        <label>Bank Reference Number</label>
+                        <input type="text" name="bank_ref" placeholder="Enter Reference Number" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Upload Proof of Payment (Screenshot)</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" name="payment_screenshot" accept="image/*" required id="fileInput">
+                            <p class="file-info">JPG, PNG or PDF (Max 5MB)</p>
+                        </div>
                     </div>
 
                     <p class="section-note" style="margin-top:15px">For Official Receipt (Optional):</p>
