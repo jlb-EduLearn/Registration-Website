@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration | Arduino Day Philippines 2026</title>
+    <title>Official Registration | Arduino Day PH 2026</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -14,88 +14,157 @@
             <div class="logo-container">
                 <img src="ITECH LOGO.png" alt="ITECH Logo" class="site-logo">
             </div>
-            <h2>Workshop Registration</h2>
-            <div class="event-details">
-                <p><strong>Arduino Day Philippines 2026</strong></p>
-                <p>Venue: iTECHLAB Innovation and Training Center</p>
-                <p>15 F/O, 1Nito Tower, Archbishop Reyes Ave, Lahug, Cebu City</p>
-                <p class="date">March 14-15, 2026</p>
-            </div>
+            <h2>OFFICIAL EVENT REGISTRATION FORM</h2>
+            <p>Arduino Day Philippines 2026 | iTECHLAB</p>
         </div>
 
-        <form action="https://formspree.io/f/mlgwaobg" method="POST" id="regForm">
+        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" id="regForm">
             
-            <div class="section-title">Personal Details</div>
-            <div class="input-group">
-                <input type="text" name="name" placeholder="Full Name" required>
-            </div>
-            <div class="input-group">
-                <input type="tel" name="phone" placeholder="Phone Number" required>
-            </div>
-            <div class="input-group">
-                <input type="text" name="school" placeholder="School / University" required>
-            </div>
-            <div class="input-group">
-                <input type="email" name="email" placeholder="Email Address" required>
-            </div>
-
-            <div class="section-title">Choose Your Seminar</div>
-            <div class="select-wrapper">
-                <select name="workshop" required>
-                    <option value="" disabled selected>Select a Workshop</option>
-                    <option value="Drone Workshop">Drone Workshop</option>
-                    <option value="VR Workshop">VR Workshop</option>
-                    <option value="Bambu Workshop">Bambu Workshop</option>
-                    <option value="Arduino Q Workshop">Arduino Q Workshop</option>
-                    <option value="Arduino Beginner">Arduino Beginner</option>
-                    <option value="Arduino Advance">Arduino Advance</option>
-                </select>
-            </div>
-
-            <div class="section-title">Registration Type</div>
-            <div class="radio-group vertical">
-                <label class="radio-card">
-                    <input type="radio" name="entry_type" value="Without Certificate (PHP 350)" required>
-                    <span class="radio-label">Without Certificate <span class="price">PHP 350</span></span>
-                </label>
-                <label class="radio-card">
-                    <input type="radio" name="entry_type" value="With Certificate (PHP 800)">
-                    <span class="radio-label">With Certificate <span class="price">PHP 800</span></span>
-                </label>
-            </div>
-
-            <div class="section-title">Step 2: Payment & Verification</div>
-            <div class="payment-box">
-                <div class="qr-container">
-                    <img src="qrcode.png" alt="GCash QR Code">
-                    <p>Scan to Pay</p>
-                </div>
-                <div class="bank-details" style="text-align: center; margin-bottom: 15px; color: #000;">
-                    <p style="font-size: 0.9rem;">Bank: <strong>METROBANK</strong></p>
-                    <p style="font-size: 0.9rem;">Account Name: <strong>ITECHLAB</strong></p>
-                    <p style="font-size: 0.9rem;">Account Number: <strong>0912 345 6789</strong></p>
-                </div>
+            <div class="form-section">
+                <div class="section-title">SECTION 1: PERSONAL INFORMATION</div>
+                <p class="section-note">(For Certificate Printing – Strictly Follow Format)</p>
                 
                 <div class="input-group">
-                    <label style="font-size: 0.75rem; font-weight: bold; color: #333; display: block; margin-bottom: 5px;">Payment Reference Number</label>
-                    <input type="text" name="gcash_ref" placeholder="13-digit Reference #" required pattern="\d*" maxlength="13">
+                    <label>Full Name (LAST NAME, First Name M.I.)</label>
+                    <input type="text" name="full_name" placeholder="e.g. Dela Cruz, Juan A." required>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="check-container">
+                        <input type="checkbox" required>
+                        <span class="checkmark"></span>
+                        <span class="label-text">I confirm the name entered above is correct for certificate printing.</span>
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <label>Preferred Name (Optional)</label>
+                    <input type="text" name="preferred_name" placeholder="Nickname">
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address (for certificate sending)</label>
+                    <input type="email" name="email" placeholder="email@example.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" name="mobile" placeholder="09XXXXXXXXX" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Gender (Optional)</label>
+                    <select name="gender">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
                 </div>
             </div>
 
-            <button type="submit" class="btn" id="submitBtn">Submit Registration</button>
+            <div class="form-section">
+                <div class="section-title">SECTION 2: INSTITUTION / PROFESSIONAL DETAILS</div>
+                
+                <div class="input-group">
+                    <label>Institution / School / Company Name</label>
+                    <input type="text" name="institution" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Position / Designation</label>
+                    <select name="position" required>
+                        <option value="" disabled selected>Select Position</option>
+                        <option value="Student">Student</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Principal">Principal</option>
+                        <option value="Coach">Coach</option>
+                        <option value="School Admin">School Admin</option>
+                        <option value="Industry Professional">Industry Professional</option>
+                        <option value="Exhibitor">Exhibitor</option>
+                        <option value="VIP Guest">VIP Guest</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">SECTION 3: WORKSHOP SELECTION</div>
+                <p class="section-note">Select ONE workshop per session:</p>
+                
+                <div class="input-group">
+                    <select name="workshop_choice" required>
+                        <option value="" disabled selected>Select Schedule & Venue</option>
+                        <optgroup label="March 14 | Morning (8AM - 12NN)">
+                            <option value="Drone_Mar14_AM">Drone Workshop (Function Room)</option>
+                            <option value="ArduinoQ_Mar14_AM">Arduino Q Workshop (iTechlab Room)</option>
+                        </optgroup>
+                        <optgroup label="March 14 | Afternoon (1PM - 5PM)">
+                            <option value="Bambu_Mar14_PM">Bambu Workshop (Function Room)</option>
+                            <option value="VR_Mar14_PM">VR Workshop (iTechlab Room)</option>
+                        </optgroup>
+                        <optgroup label="March 15 | Morning (8AM - 12NN)">
+                            <option value="Beginner_Mar15_AM">Arduino Beginner</option>
+                        </optgroup>
+                        <optgroup label="March 15 | Afternoon (1PM - 5PM)">
+                            <option value="Advance_Mar15_PM">Arduino Advance</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">SECTION 4: PAYMENT DETAILS</div>
+                <div class="payment-box">
+                    <div class="qr-container">
+                        <img src="qr-code.png" alt="GCash QR">
+                        <p>GCash: 0912 345 6789 (ITECHLAB)</p>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>GCash Reference Number</label>
+                        <input type="text" name="gcash_ref" placeholder="13-digit number" required pattern="\d{13}">
+                    </div>
+
+                    <p class="section-note" style="margin-top:15px">For Official Receipt (Optional):</p>
+                    <input type="text" name="OR_Name" placeholder="OR Name" class="sub-input">
+                    <input type="text" name="OR_Address" placeholder="OR Address" class="sub-input">
+                    <input type="text" name="OR_TIN" placeholder="TIN (if applicable)" class="sub-input">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">SECTION 5: CONSENT & AGREEMENT</div>
+                <div class="checkbox-group">
+                    <label class="check-container">
+                        <input type="checkbox" name="consent_privacy" required>
+                        <span class="checkmark"></span>
+                        <span class="label-text">I agree to the Data Privacy Policy.</span>
+                    </label>
+                    <label class="check-container">
+                        <input type="checkbox" name="consent_rules" required>
+                        <span class="checkmark"></span>
+                        <span class="label-text">I agree to abide by the event rules.</span>
+                    </label>
+                    <label class="check-container">
+                        <input type="checkbox" name="consent_media" required>
+                        <span class="checkmark"></span>
+                        <span class="label-text">I consent to photo/video documentation.</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">Finalize Registration</button>
         </form>
     </div>
 
     <script>
         const form = document.getElementById('regForm');
         const btn = document.getElementById('submitBtn');
-
         form.onsubmit = () => {
-            btn.innerText = "Sending Data...";
+            btn.innerText = "Submitting Official Record...";
             btn.style.opacity = "0.7";
             btn.style.pointerEvents = "none";
         };
     </script>
-
 </body>
 </html>
