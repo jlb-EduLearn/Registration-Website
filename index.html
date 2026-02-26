@@ -6,28 +6,60 @@
     <meta name="color-scheme" content="light">
     <title>Official Registration | Arduino Day PH 2026</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        #loadingOverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .spinner {
+            width: 50px; height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .section-note { font-size: 0.8rem; color: #64748b; margin-bottom: 15px; }
+        .payment-box p { margin: 5px 0; font-size: 0.9rem; }
+    </style>
 </head>
 <body>
+
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <h2 id="statusTitle" style="margin-top: 20px; font-weight: 800;">Processing Registration...</h2>
+        <p id="statusMsg">Uploading payment proof and syncing record. Please wait.</p>
+        <button id="closeBtn" onclick="location.reload()" class="btn" style="display:none; width:auto; padding: 10px 40px; margin-top:20px; background:#6366f1; color:white; border:none; border-radius:8px; cursor:pointer;">Register Another</button>
+    </div>
 
     <div class="glass-card">
         <div class="header">
             <div class="logo-container">
                 <img src="ITECH LOGO.png" alt="ITECH Logo" class="site-logo">
             </div>
-            <h2>OFFICIAL EVENT REGISTRATION FORM</h2>
+            <h2 style="font-weight: 800;">OFFICIAL EVENT REGISTRATION FORM</h2>
             <p>Arduino Day Philippines 2026 | iTECHLAB</p>
         </div>
 
-        <form action="https://formspree.io/f/mlgwaobg" method="POST" id="regForm" enctype="multipart/form-data">
-            
+        <form id="regForm">
+            <input type="hidden" name="payment_mode" value="Bank Transfer">
+
             <div class="form-section">
                 <div class="section-title">SECTION 1: PERSONAL INFORMATION</div>
                 <p class="section-note">(For Certificate Printing – Strictly Follow Format)</p>
                 
                 <div class="input-group">
-                    <label>Full Name (LAST NAME, First Name M.I.)</label>
-                    <input type="text" name="full_name" placeholder="e.g. Dela Cruz, Juan A." required>
+                    <label>Full Name</label>
+                    <input type="text" name="fullname" placeholder="e.g. Juan Dela Cruz" required>
                 </div>
 
                 <div class="checkbox-group">
@@ -44,7 +76,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label>Email Address (for certificate sending)</label>
+                    <label>Email Address</label>
                     <input type="email" name="email" placeholder="email@example.com" required>
                 </div>
 
@@ -56,7 +88,7 @@
                 <div class="input-group">
                     <label>Gender (Optional)</label>
                     <select name="gender">
-                        <option value="">Select Gender</option>
+                        <option value="Not Specified">Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Prefer not to say">Prefer not to say</option>
@@ -65,24 +97,18 @@
             </div>
 
             <div class="form-section">
-                <div class="section-title">SECTION 2: INSTITUTION / PROFESSIONAL DETAILS</div>
-                
+                <div class="section-title">SECTION 2: INSTITUTION DETAILS</div>
                 <div class="input-group">
                     <label>Institution / School / Company Name</label>
-                    <input type="text" name="institution" required>
+                    <input type="text" name="institution" placeholder="Full Name of Institution" required>
                 </div>
-
                 <div class="input-group">
                     <label>Position / Designation</label>
                     <select name="position" required>
                         <option value="" disabled selected>Select Position</option>
                         <option value="Student">Student</option>
                         <option value="Teacher">Teacher</option>
-                        <option value="Principal">Principal</option>
-                        <option value="Coach">Coach</option>
-                        <option value="School Admin">School Admin</option>
                         <option value="Industry Professional">Industry Professional</option>
-                        <option value="Exhibitor">Exhibitor</option>
                         <option value="VIP Guest">VIP Guest</option>
                     </select>
                 </div>
@@ -90,7 +116,6 @@
 
             <div class="form-section">
                 <div class="section-title">SECTION 3: WORKSHOP SELECTION</div>
-                
                 <div class="input-group">
                     <label>Step 1: Choose Event Date</label>
                     <select id="dateSelect" required>
@@ -102,66 +127,44 @@
 
                 <div class="input-group" id="workshopWrapper" style="display: none;">
                     <label>Step 2: Select Workshop & Venue</label>
-                    <select name="workshop_choice" id="workshopSelect" required>
+                    <select name="workshop" id="workshopSelect" required>
                         <option value="" disabled selected>Tap to select...</option>
-                        
-                        <option value="Drone_Mar14_AM" class="mar14">Morning: Drone Workshop — Function Rm</option>
-                        <option value="ArduinoQ_Mar14_AM" class="mar14">Morning: Arduino Q — iTechlab Rm</option>
-                        <option value="Bambu_Mar14_PM" class="mar14">Afternoon: Bambu Workshop — Function Rm</option>
-                        <option value="VR_Mar14_PM" class="mar14">Afternoon: VR Workshop — iTechlab Rm</option>
-
-                        <option value="Beginner_Mar15_AM" class="mar15">Morning: Arduino Beginner</option>
-                        <option value="Advance_Mar15_PM" class="mar15">Afternoon: Arduino Advance</option>
+                        <option value="Drone Workshop" class="mar14">Morning: Drone Workshop</option>
+                        <option value="Arduino Q" class="mar14">Morning: Arduino Q</option>
+                        <option value="Bambu Workshop" class="mar14">Afternoon: Bambu Workshop</option>
+                        <option value="VR Workshop" class="mar14">Afternoon: VR Workshop</option>
+                        <option value="Arduino Beginner" class="mar15">Morning: Arduino Beginner</option>
+                        <option value="Arduino Advance" class="mar15">Afternoon: Arduino Advance</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-section">
                 <div class="section-title">SECTION 4: PAYMENT DETAILS</div>
-                <div class="payment-box">
-                    <div class="payment-info-text">
-                        <p><strong>Bank Name:</strong> METROBANK</p>
-                        <p><strong>Account Name:</strong> iTECHNOLOGENT INC.</p>
-                        <p><strong>Account Number:</strong> 3 5133 5156 0470</p>
-                    </div>
+                <div class="payment-box" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 12px;">
+                    <p><strong>Bank:</strong> METROBANK</p>
+                    <p><strong>Account Name:</strong> iTECHNOLOGENT INC.</p>
+                    <p><strong>Account Number:</strong> 3 5133 5156 0470</p>
                 
-                    <div class="input-group" style="margin-top: 20px;">
+                    <div class="input-group" style="margin-top: 15px;">
                         <label>Bank Reference Number</label>
                         <input type="text" name="bank_ref" placeholder="Enter Reference Number" required>
                     </div>
 
                     <div class="input-group">
-                        <label>Upload Proof of Payment (Screenshot)</label>
-                        <div class="file-upload-wrapper">
-                            <input type="file" name="payment_screenshot" accept="image/*" required id="fileInput">
-                            <p class="file-info">JPG, PNG or PDF (Max 5MB)</p>
-                        </div>
+                        <label>Upload Proof of Payment</label>
+                        <input type="file" id="fileInput" accept="image/*" required>
                     </div>
-
-                    <p class="section-note" style="margin-top:15px">For Official Receipt (Optional):</p>
-                    <input type="text" name="OR_Name" placeholder="OR Name" class="sub-input">
-                    <input type="text" name="OR_Address" placeholder="OR Address" class="sub-input">
-                    <input type="text" name="OR_TIN" placeholder="TIN (if applicable)" class="sub-input">
                 </div>
             </div>
 
             <div class="form-section">
-                <div class="section-title">SECTION 5: CONSENT & AGREEMENT</div>
+                <div class="section-title">SECTION 5: CONSENT</div>
                 <div class="checkbox-group">
                     <label class="check-container">
-                        <input type="checkbox" name="consent_privacy" required>
+                        <input type="checkbox" required>
                         <span class="checkmark"></span>
-                        <span class="label-text">I agree to the Data Privacy Policy.</span>
-                    </label>
-                    <label class="check-container">
-                        <input type="checkbox" name="consent_rules" required>
-                        <span class="checkmark"></span>
-                        <span class="label-text">I agree to abide by the event rules.</span>
-                    </label>
-                    <label class="check-container">
-                        <input type="checkbox" name="consent_media" required>
-                        <span class="checkmark"></span>
-                        <span class="label-text">I consent to photo/video documentation.</span>
+                        <span class="label-text">I agree to the Privacy Policy and Rules.</span>
                     </label>
                 </div>
             </div>
@@ -171,6 +174,11 @@
     </div>
 
     <script>
+        // CONFIGURATION
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwXVR46okMl5JFp4_Qqh6nF7P9YdDnahztyQ1yP2ZiPeUIlZ_gVNFK2pyDd6qhgAA/exec';
+        const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dbd7v3irn/image/upload';
+        const CLOUDINARY_PRESET = 'REGISTRATION';
+
         // Dependent Dropdown Logic
         const dateSelect = document.getElementById('dateSelect');
         const workshopWrapper = document.getElementById('workshopWrapper');
@@ -178,13 +186,10 @@
         const allOptions = Array.from(workshopSelect.options);
 
         dateSelect.addEventListener('change', function() {
-            const selectedDate = this.value;
             workshopWrapper.style.display = 'block';
-            
-            // Reset and Filter options
             workshopSelect.innerHTML = '<option value="" disabled selected>Tap to select...</option>';
             allOptions.forEach(option => {
-                if (option.classList.contains(selectedDate)) {
+                if (option.classList.contains(this.value)) {
                     workshopSelect.appendChild(option.cloneNode(true));
                 }
             });
@@ -192,12 +197,57 @@
 
         // Form Submission Logic
         const form = document.getElementById('regForm');
-        const btn = document.getElementById('submitBtn');
-        form.onsubmit = () => {
-            btn.innerText = "Submitting Official Record...";
-            btn.style.opacity = "0.7";
-            btn.style.pointerEvents = "none";
-        };
+        const fileInput = document.getElementById('fileInput');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            
+            try {
+                let imageUrl = "No Screenshot";
+
+                // STEP 1: Upload to Cloudinary
+                if (fileInput.files.length > 0) {
+                    const cloudData = new FormData();
+                    cloudData.append('file', fileInput.files[0]);
+                    cloudData.append('upload_preset', CLOUDINARY_PRESET);
+
+                    const cloudRes = await fetch(CLOUDINARY_URL, { method: 'POST', body: cloudData });
+                    const cloudJson = await cloudRes.json();
+                    
+                    if (!cloudRes.ok) throw new Error(cloudJson.error.message);
+                    imageUrl = cloudJson.secure_url;
+                }
+
+                // STEP 2: Send to Google Sheets
+                const formData = new FormData(form);
+                const dataObj = {};
+                formData.forEach((value, key) => { dataObj[key] = value; });
+                dataObj['screenshot_url'] = imageUrl;
+
+                await fetch(scriptURL, { 
+                    method: 'POST', 
+                    mode: 'no-cors', 
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(dataObj)
+                });
+
+                // SUCCESS UI
+                document.getElementById('statusTitle').innerText = "Registration Successful!";
+                document.getElementById('statusTitle').style.color = "#10b981";
+                document.getElementById('statusMsg').innerText = "Record and proof successfully synced.";
+                document.querySelector('.spinner').style.display = 'none';
+                document.getElementById('closeBtn').style.display = 'block';
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('statusTitle').innerText = "Sync Failed";
+                document.getElementById('statusMsg').innerText = err.message || "Check connection or Cloudinary settings.";
+                document.querySelector('.spinner').style.display = 'none';
+                document.getElementById('closeBtn').style.display = 'block';
+                document.getElementById('closeBtn').innerText = "Try Again";
+            }
+        });
     </script>
 </body>
 </html>
